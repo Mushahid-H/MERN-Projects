@@ -49,9 +49,9 @@ function Home_screen() {
                     setSearch(e.target.value)
                   }}
                 />
-                <button className='btn btn-outline-success' type='submit'>
+                {/* <button className='btn btn-outline-success' type='submit'>
                   Search
-                </button>
+                </button> */}
               </div>
             </div>
             <div className='carousel-item active'>
@@ -130,10 +130,9 @@ function Home_screen() {
                             className='col-md-4 col-sm-6 col-12'
                           >
                             <Card
-                              name={filteredItems.name}
-                              imgSrc={filteredItems.img}
+                              foodItems={filteredItems}
                               options={filteredItems.options[0]}
-                              des={filteredItems.description}
+                              // des={filteredItems.description}
                             />
                           </div>
                         )

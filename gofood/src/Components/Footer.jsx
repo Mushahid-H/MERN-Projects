@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 function Footer() {
   return (
     <div className='container-fluid bg-dark'>
-      <footer className='d-flex flex-wrap justify-content-between align-items-center py-3 my-4 mx-md-5 mx-2 border-top'>
+      <footer className='d-flex flex-wrap justify-content-between align-items-center py-4 mt-4 mx-md-5 mx-2 border-top'>
         <div className='col-md-4 d-flex align-items-center'>
           <span className='text-light'>© 2024 GoFood, Inc</span>
         </div>

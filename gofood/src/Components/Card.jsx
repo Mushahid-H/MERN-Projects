@@ -1,25 +1,51 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useCart } from './ContextReducer'
 
 const Card = (props) => {
+  let data = useCart()
+  let dispatch = useDispatch()
+  const priceRef = useRef()
+  const [qty, setQty] = useState(1)
+  const [size, setSize] = useState('')
   const options = props.options
 
   const priceOptions = Object.keys(options)
 
-  const handleAddtoCart = () => {}
+  let finalPrice = qty * parseInt(options[size])
 
+  const foodItem = props.foodItems
+  const handleAddtoCart = async () => {
+    await dispatch({
+      type: 'ADD',
+      id: foodItem._id,
+      name: foodItem.name,
+      price: finalPrice,
+      qty: qty,
+      size: size,
+    })
+    console.log(data)
+  }
+
+  useEffect(() => {
+    setSize(priceRef.current.value)
+  }, [])
   return (
     <div>
-      <div className='card mt-3' style={{ maxHeight: '360px' }}>
+      <div className='card mt-3' style={{ maxHeight: '400px' }}>
         <img
-          src={props.imgSrc}
+          src={foodItem.img}
           className='card-img-top overflow-hidden object-fit-cover'
           alt='...'
+          // style={{ height: '350px' }}
         />
         <div className='card-body'>
-          <h5 className='card-title'>{props.name}</h5>
-          <p className='card-text'>{props.des}</p>
+          <h5 className='card-title'>{foodItem.name}</h5>
+          <p className='card-text'>{foodItem.description}</p>
           <div className='container'>
-            <select className='m-2 p-1'>
+            <select
+              className='m-2 p-1'
+              onChange={(e) => setQty(e.target.value)}
+            >
               {Array.from(Array(6), (e, i) => {
                 return (
                   <option key={i + 1} value={i + 1}>
@@ -28,7 +54,11 @@ const Card = (props) => {
                 )
               })}
             </select>
-            <select className='p-1'>
+            <select
+              className='p-1'
+              ref={priceRef}
+              onChange={(e) => setSize(e.target.value)}
+            >
               {priceOptions.map((data) => {
                 return (
                   <option key={data} value={data}>
@@ -38,7 +68,9 @@ const Card = (props) => {
               })}
             </select>
 
-            <div className='d-inline fs-6 ms-1'>Total Price</div>
+            <div className='d-inline fs-6 ms-1'>
+              Total Price PKR{finalPrice}/-
+            </div>
 
             <hr />
 
