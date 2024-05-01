@@ -12,15 +12,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(
-      JSON.stringify({
-        name: credentials.name,
-        email: credentials.email,
-        password: credentials.password,
-        location: credentials.location,
-      })
-    )
-
     const response = await fetch('http://localhost:5000/api/createuser', {
       method: 'POST',
       headers: {
@@ -34,7 +25,7 @@ const Signup = () => {
       }),
     })
     const json = await response.json()
-    console.log(json)
+
     if (!json.success) {
       alert('Enter valid credentials')
     }
@@ -106,7 +97,7 @@ const Signup = () => {
           </div>
 
           <button type='submit' className='btn btn-primary mb-3'>
-            Submit
+            Register
           </button>
           <Link to='/login' className='btn btn-outline-danger'>
             Alrady a user

@@ -1,8 +1,14 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Navbar() {
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    localStorage.removeItem('authtoken')
+    navigate('/login')
+  }
+
   return (
     <div>
       <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
@@ -22,23 +28,43 @@ function Navbar() {
             <span className='navbar-toggler-icon'></span>
           </button>
           <div className='collapse navbar-collapse' id='navbarNav'>
-            <ul className='navbar-nav'>
+            <ul className='navbar-nav me-auto'>
               <li className='nav-item'>
                 <Link className='nav-link active' aria-current='page' to='/'>
                   Home
                 </Link>
               </li>
-              <li className='nav-item'>
-                <Link className='nav-link' to='/login'>
+
+              {localStorage.getItem('authtoken') ? (
+                <li className='nav-item'>
+                  <Link className='nav-link'>My Orders</Link>
+                </li>
+              ) : (
+                ''
+              )}
+            </ul>
+
+            {!localStorage.getItem('authtoken') ? (
+              <div className='d-flex gap-1'>
+                <Link className='btn btn-light' to='/login'>
                   Login
                 </Link>
-              </li>
-              <li className='nav-item'>
-                <Link className='nav-link' to='/signup'>
+
+                <Link className='btn btn-light' to='/signup'>
                   Signup
                 </Link>
-              </li>
-            </ul>
+              </div>
+            ) : (
+              <div className='d-flex gap-1'>
+                <div className='btn btn-light'>My Cart</div>
+                <div
+                  className='btn btn-light text-danger'
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
