@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
+import Modal from '../Model'
+import Cart from '../screens/Cart'
+import { useCart } from './ContextReducer'
 
 function Navbar() {
+  let data = useCart()
+  const [cartView, setCartView] = useState(false)
   const navigate = useNavigate()
   const handleLogout = () => {
     localStorage.removeItem('authtoken')
@@ -56,7 +61,24 @@ function Navbar() {
               </div>
             ) : (
               <div className='d-flex gap-1'>
-                <div className='btn btn-light'>My Cart</div>
+                <div
+                  className='btn btn-light'
+                  onClick={() => {
+                    setCartView(true)
+                  }}
+                >
+                  My Cart{' '}
+                  <span class='badge bg-danger rounded-circle'>
+                    {data.length}
+                  </span>
+                </div>
+
+                {cartView ? (
+                  <Modal onClose={() => setCartView(false)}>
+                    <Cart />
+                  </Modal>
+                ) : null}
+
                 <div
                   className='btn btn-light text-danger'
                   onClick={handleLogout}

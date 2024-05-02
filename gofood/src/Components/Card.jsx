@@ -14,7 +14,39 @@ const Card = (props) => {
   let finalPrice = qty * parseInt(options[size])
 
   const foodItem = props.foodItems
+
   const handleAddtoCart = async () => {
+    let food = []
+
+    for (const item of data) {
+      if (item.id === foodItem._id) {
+        food = item
+        break
+      }
+    }
+    if (food) {
+      console.log('hello')
+      if (food.size === size) {
+        await dispatch({
+          type: 'UPDATE',
+          id: foodItem._id,
+          price: finalPrice,
+          qty: qty,
+        })
+        return
+      } else if (food.size !== size) {
+        await dispatch({
+          type: 'ADD',
+          id: foodItem._id,
+          name: foodItem.name,
+          price: finalPrice,
+          qty: qty,
+          size: size,
+        })
+        return
+      } else return
+    }
+
     await dispatch({
       type: 'ADD',
       id: foodItem._id,
@@ -23,7 +55,6 @@ const Card = (props) => {
       qty: qty,
       size: size,
     })
-    console.log(data)
   }
 
   useEffect(() => {
