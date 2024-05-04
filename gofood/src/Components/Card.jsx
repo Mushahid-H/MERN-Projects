@@ -25,7 +25,6 @@ const Card = (props) => {
       }
     }
     if (food) {
-      console.log('hello')
       if (food.size === size) {
         await dispatch({
           type: 'UPDATE',

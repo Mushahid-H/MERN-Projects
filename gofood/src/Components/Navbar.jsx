@@ -68,7 +68,7 @@ function Navbar() {
                   }}
                 >
                   My Cart{' '}
-                  <span class='badge bg-danger rounded-circle'>
+                  <span className='badge bg-danger rounded-circle'>
                     {data.length}
                   </span>
                 </div>

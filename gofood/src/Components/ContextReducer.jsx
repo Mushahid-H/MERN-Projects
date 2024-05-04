@@ -34,6 +34,9 @@ const reducer = (state, action) => {
         return arr
       })
       return arr
+    case 'DROP':
+      let emptyArray = []
+      return emptyArray
     default:
       Console.log('Error in Reducer')
   }

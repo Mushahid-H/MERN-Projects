@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 app.use(express.json())
 app.use('/api', require('./routes/login_signup'))
 app.use('/api', require('./routes/main_data'))
+app.use('/api', require('./routes/order_data'))
 
 app.listen(port, () => {
   console.log(`app running on port ${port}`)
