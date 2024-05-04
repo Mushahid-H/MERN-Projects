@@ -3,7 +3,7 @@ import Home_screen from './screens/Home_screen'
 import Login_screen from './screens/Login_screen'
 import Signup from './screens/Signup'
 import { CartProvider } from './Components/ContextReducer'
-import Cart from './screens/Cart'
+import My_Order from './screens/My_Order'
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
             <Route exact path='/' element={<Home_screen />} />
             <Route exact path='/login' element={<Login_screen />} />
             <Route exact path='/signup' element={<Signup />} />
-            {/* <Route exact path='/cart' element={<Cart />} /> */}
+            <Route exact path='/myorder' element={<My_Order />} />
           </Routes>
         </div>
       </Router>

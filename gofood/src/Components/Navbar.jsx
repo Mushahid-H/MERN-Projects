@@ -35,14 +35,16 @@ function Navbar() {
           <div className='collapse navbar-collapse' id='navbarNav'>
             <ul className='navbar-nav me-auto'>
               <li className='nav-item'>
-                <Link className='nav-link active' aria-current='page' to='/'>
+                <Link className='nav-link' aria-current='page' to='/'>
                   Home
                 </Link>
               </li>
 
               {localStorage.getItem('authtoken') ? (
                 <li className='nav-item'>
-                  <Link className='nav-link'>My Orders</Link>
+                  <Link className='nav-link' to='/myorder'>
+                    My Orders
+                  </Link>
                 </li>
               ) : (
                 ''
